@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 let reqInstance = axios.create({
-  baseURL:`http://localhost:${process.env.PORT},`,
+  baseURL:`http://localhost:5000`,
     headers: {
       Authorization : "Bearer:" +localStorage.getItem("sapience")
       }
