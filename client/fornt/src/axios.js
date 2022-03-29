@@ -3,7 +3,7 @@ import axios from 'axios'
 
 let reqInstance = axios.create({
     headers: {
-      Authorization : "Bearer:" +localStorage.getItem("sapience")
+      Authorization : "Bearer:" +window.localStorage.getItem("sapience")
       }
   })
 
