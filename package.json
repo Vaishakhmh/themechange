@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "client": "cd client/fornt && npm run start",
-    "start": "concurrently \"node index.js\" \"cd client/fornt\" \"npm run client\" "
+     "server":"node index.js",
+    "start": "concurrently \"npm run server\"  \"npm run client\"",
+    "heroku-postbuild": "cd client/fornt && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",

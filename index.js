@@ -3,8 +3,8 @@ const bodyParser=require('body-parser');
 const express=require('express');
 const userRoute=require('./routes/user');
 const cors=require('cors');
-
 const app=express();
+app.use(express.static(path.resolve(__dirname, "./client/fornt/build")));
 app.use(cors())
 app.use(bodyParser());
 app.use(userRoute);
