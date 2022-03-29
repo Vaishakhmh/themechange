@@ -26,7 +26,7 @@ const connect=mongoose.connect(encodeURI(config.connectionUrl),{connectTimeoutMS
 
 const PORT = process.env.PORT || 5000;
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "client/fornt", "build", "index.html"));
 });
 app.listen(PORT,()=>{
     console.log('Server Started at ',PORT);
