@@ -8,7 +8,7 @@ const CustomThemeProvider = props => {
 	const themeArray=['light','dark','blue','red'];
 	const { children } = props;
 
-	// Get current theme from localStorage
+	// Get current theme from store
 	const currentTheme =themeArray[props.auth.user.theme?props.auth.user.theme-1:1];
 
 

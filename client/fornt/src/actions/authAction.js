@@ -1,10 +1,9 @@
 import {SET_CURRENT_USER,SET_LOADING,UNSET_LOADING,SET_THEME} from './actionTypes'
-import axios from 'axios'
 import axiosInstance from '../axios';
 
 export const loginUser=(email,password)=>(dispatch)=>{
     dispatch(setLoading(true));
-   axios.post('http://localhost:5000/login',{email,password}).then((res)=>{
+    axiosInstance.post('/login',{email,password}).then((res)=>{
     localStorage.setItem('sapience',res.data.token);
     dispatch(setLoading(false));
     dispatch(set_current_user(res.data.user));
@@ -15,7 +14,7 @@ export const loginUser=(email,password)=>(dispatch)=>{
 
 export const checkCurrentUser=()=>(dispatch)=>{
     dispatch(setLoading(true));
-    axiosInstance.get('http://localhost:5000/validateToken').then((res)=>{
+    axiosInstance.get('/validateToken').then((res)=>{
         dispatch(set_current_user(res.data));
         dispatch(setLoading(false));
     }).catch((err)=>{
@@ -25,7 +24,7 @@ export const checkCurrentUser=()=>(dispatch)=>{
 
 export const setTheme=(theme)=>(dispatch)=>{
     dispatch(setLoading(true));
-    axiosInstance.get(`http://localhost:5000/changeTheme/${theme}`).then((res)=>{
+    axiosInstance.get(`/changeTheme/${theme}`).then((res)=>{
         dispatch(set_theme(theme));
         dispatch(setLoading(false));
     }).catch((err)=>{
