@@ -1,0 +1,19 @@
+import { createTheme } from '@material-ui/core/styles';
+
+//default 'normal' theme
+const normal = createTheme({
+	palette: {
+		primary: {
+			main: '#616a70',
+			contrastText: '#ffffff'
+		},
+		background: {
+			default: '#ffffff'
+		},
+		text: {
+			primary: '#000000'
+		}
+	}
+});
+
+export default normal;

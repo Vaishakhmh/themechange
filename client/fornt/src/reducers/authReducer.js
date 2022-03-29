@@ -1,9 +1,11 @@
-import {SET_CURRENT_USER,SET_LOADING,UNSET_LOADING,SET_THEME} from '../actions/actionTypes'
+import {SET_CURRENT_USER,SET_LOADING,UNSET_LOADING,SET_THEME,SET_ERR,USER_REG} from '../actions/actionTypes'
 
 const initialState={
     isAuthenticated:false,
     user:{},
-    loading:false
+    loading:false,
+    error:'',
+    registered:false,
 }
 const authReducer=(state=initialState,action)=>{
     switch(action.type){
@@ -33,6 +35,18 @@ const authReducer=(state=initialState,action)=>{
                    ...state.user,
                    theme:action.payload
                }
+            }
+        }
+        case SET_ERR:{
+            return{
+                ...state,
+                error:action.payload
+            }
+        }
+        case USER_REG:{
+            return {
+                ...state,
+                registered:true
             }
         }
         default:

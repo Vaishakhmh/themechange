@@ -29,7 +29,7 @@ const userSchema= new mongoose.Schema({
     },
     theme:{
         type:Number,
-        default:0,
+        default:1,
     },
     token:{
         type:Array,

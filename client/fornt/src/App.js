@@ -3,8 +3,9 @@ import './App.css';
 import {checkCurrentUser} from './actions/authAction'
 import Login from './pages/login'
 import Home from './pages/home'
-import {Routes,BrowserRouter,Route} from 'react-router-dom'
+import {Routes,BrowserRouter,Route,Navigate} from 'react-router-dom'
 import {connect} from 'react-redux'
+import Signup from './pages/signup'
 
 
 
@@ -17,9 +18,11 @@ function App(props) {
           <BrowserRouter>
     {auth?<Routes>
         <Route exact path="/" element={<Home/>}/>
+        <Route path="*" element={<Navigate replace to="/"/>}/>
     </Routes>:
     <Routes>
       <Route exact path="/" element={<Login/>}/>
+      <Route exact path="/signup" element={<Signup/>}/>
     </Routes>
       }
       </BrowserRouter>

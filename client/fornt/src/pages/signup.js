@@ -4,22 +4,23 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid';
 import DP from '@mui/material/Avatar/Avatar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button'
 import Image from '../download.png'
 import { useState } from 'react';
 import  {connect} from 'react-redux';
-import { loginUser,emptyError } from '../actions/authAction';
-import {useNavigate} from 'react-router-dom'
+import { signupUser,emptyError } from '../actions/authAction';
+import {useNavigate} from 'react-router-dom';
 
 
 
 
-function Login(props){
+function Signup(props){
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
+  const [username,setUsername]=useState('');
   const Navigate=useNavigate();
 
   const handleChange=(evt)=>{
@@ -27,13 +28,15 @@ function Login(props){
        let identifier=evt.target.id;
        if(identifier==='email'){
          setEmail(value);
-      }else{
+      }else if(identifier==="password"){
         setPassword(value);
+      }else {
+          setUsername(value);
       }
   }
  
   const handleSubmit=()=>{
-      props.loginUser(email,password)
+      props.signupUser(email,password,username)
   }
 
  return( <Grid container component="main" sx={{ height: '100vh' }}>
@@ -77,7 +80,7 @@ function Login(props){
           <DP />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign Up
         </Typography>
         {props.auth.error!==""&&
         <Typography component="h5"color="red">{props.auth.error}</Typography>
@@ -104,6 +107,17 @@ function Login(props){
             onChange={(e)=>handleChange(e)}
             autoFocus
           />
+          <TextField
+            type="text"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            onChange={(e)=>handleChange(e)}
+            autoFocus
+          />
           <LoadingButton
             fullWidth
             loading={props.auth.loading}
@@ -111,12 +125,9 @@ function Login(props){
             variant="contained"
             onClick={()=>handleSubmit()}
           >
-            Sign In
-          </LoadingButton>
-          <Button onClick={()=>{props.emptyError();Navigate('/signup')}}>Switch to Signup</Button> 
-          {props.auth.user.username &&
-          <Typography>user registered please login to continuo</Typography>
-          }
+            Sign Up
+          </LoadingButton>'
+          <Button onClick={()=>{props.emptyError();Navigate('/')}}>Switch to Login</Button> 
         </Box>
       </Box>
     </Grid>
@@ -126,12 +137,12 @@ function Login(props){
 }
 
 const mapDispatchToProps=dispatch=>({
-  loginUser:(email,password)=>dispatch(loginUser(email,password)),
-  emptyError:()=>dispatch(emptyError())
+    signupUser:(email,password,username)=>dispatch(signupUser(email,password,username)),
+    emptyError:()=>dispatch(emptyError())
 })
 
 const mapStateFromProps=(state)=>({
   auth:state.authReducer
 })
 
-export default  connect(mapStateFromProps,mapDispatchToProps)(Login);
+export default  connect(mapStateFromProps,mapDispatchToProps)(Signup);
